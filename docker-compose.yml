@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  shop-api:
+    build:
+      context: .
+      dockerfile: Dockerfile-shop-api
+    command: /bin/bash
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/src
