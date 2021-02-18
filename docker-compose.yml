@@ -5,6 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-shop-api
+    environment:
+      - FLASK_CONFIG=development
+      - SECRET_KEY=Your_secret_string
+    ports:
+      - 8080:8080
     command: /bin/bash
     tty: true
     stdin_open: true

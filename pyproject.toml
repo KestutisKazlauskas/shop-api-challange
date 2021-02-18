@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "shop-api"
+version = "0.1.0"
+description = ""
+authors = ["Kestutis Kazlauskas"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Flask = "^1.1.2"
+Flask-SQLAlchemy = "^2.4.4"
+Flask-Migrate = "^2.6.0"
+Flask-Script = "^2.0.6"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
