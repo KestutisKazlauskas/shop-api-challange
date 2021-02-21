@@ -4,12 +4,12 @@ import os
 class MainConfig:
     DEBUG = False
     SECRET = os.getenv('SECRET_KEY')
-    REST_URL_PREFIX = '/api'
 
 
 class DevelopmentConfig(MainConfig):
     DEBUG = True
     DEBUG_TOOLBAR_ENABLED = True
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@db/{os.getenv('DB')}"
 
 
 class TestingConfig(MainConfig):

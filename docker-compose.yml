@@ -6,8 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile-shop-api
     environment:
+      - FLASK_APP=/src/infrastructure/run.py
       - FLASK_CONFIG=development
       - SECRET_KEY=Your_secret_string
+      - DB=shop-api
+      - DB_USER=shop-api
+      - DB_PASSWORD=change_this
     ports:
       - 8080:8080
     command: /bin/bash
@@ -15,3 +19,14 @@ services:
     stdin_open: true
     volumes:
       - .:/src
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=shop-api
+      - POSTGRES_USER=shop-api
+      - POSTGRES_PASSWORD=change_this
+  db-client:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080

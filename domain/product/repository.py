@@ -1,20 +1,34 @@
 from abc import ABC, abstractmethod
-from .entities import Product
+from typing import List
+from .entities import Product, ProductType
 
 
 class ProductRepository(ABC):
     @abstractmethod
-    def find_all(self):
+    def generate_id(self) -> str:
         raise NotImplementedError
 
     @abstractmethod
-    def find_by(self, _id: int):
+    def find_all(self) -> List[Product]:
         raise NotImplementedError
 
     @abstractmethod
-    def save(self, product: Product):
+    def find_by(self, _id: str) -> Product:
         raise NotImplementedError
 
     @abstractmethod
-    def updated(self, product: Product):
+    def find_product_type_by(self, _id: str) -> ProductType:
         raise NotImplementedError
+
+    @abstractmethod
+    def create_product_type(self, product_type: ProductType) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    def create_from(self, product: Product) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    def update_from(self, product: Product) -> None:
+        raise NotImplementedError
+
