@@ -44,6 +44,8 @@ class ProductService:
 
         product.set_product_price(product_dto.price, product_dto.currency)
 
+        self.repository.create_from(product)
+
         return product
 
     def archive_product(self, product_id: str):

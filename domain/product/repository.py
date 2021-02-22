@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List
+
 from .entities import Product, ProductType
 
 
@@ -21,14 +22,11 @@ class ProductRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def create_product_type(self, product_type: ProductType) -> None:
-        raise NotImplementedError
-
-    @abstractmethod
     def create_from(self, product: Product) -> None:
         raise NotImplementedError
 
     @abstractmethod
     def update_from(self, product: Product) -> None:
+        # TODO replace with delete only
         raise NotImplementedError
 

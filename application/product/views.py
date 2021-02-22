@@ -11,6 +11,20 @@ from .services import ProductService
 
 
 class ProductApiView(MethodView):
+    """
+    Request body example for POST api/products/:
+        {
+            "name": "Test product",
+            "product_type_id": "4585a664-9aef-44da-ba0c-9aa4ea787ce5",
+            "product_type_name": "Not Sport",
+            "quantity": 4,
+            "price": 12.39,
+            "currency": "USD",
+            "images": [
+                {"name": "This is a name", "url": "https://via.placeholder.com/300/09f/fff.png"}
+            ]
+        }
+    """
     def __init__(self):
         super().__init__()
         self.repository = ProductRepository()

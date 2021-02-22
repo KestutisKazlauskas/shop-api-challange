@@ -18,7 +18,7 @@ def create_app(config_name):
 
     from infrastructure import models
 
-    from application import product_blueprint
+    from application.product import product_blueprint
     app.register_blueprint(product_blueprint)
 
     return app

@@ -47,6 +47,8 @@ class Product:
         if not self.images:
             self.images = [image]
 
+            return
+
         self.images.append(image)
 
     def set_product_price(self, price: float, currency: str):

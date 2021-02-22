@@ -1,7 +1,7 @@
 import pytest
 from application.product.responses import ProductResponseConverter
 from domain.product.exceptions import InvalidProductException
-# TODO make product fixtures in separet test
+# TODO make product fixtures in separate
 from domain.product.entities import Product, ProductType, Image, Price
 
 from unittest import TestCase
