@@ -2,7 +2,8 @@ from typing import List
 from dataclasses import dataclass
 from domain.product.exceptions import InvalidProductException
 
-from .value_objects import Image, Price
+from .value_objects import Image
+from domain.common.value_objects import Price
 
 
 @dataclass
@@ -26,8 +27,6 @@ class Product:
     type: ProductType = None
     images: List[Image] = None
     price: Price = Price(value=0.0, currency=Price.currency_enum.USD.value)
-    # TODO do we really need this field??
-    is_archived: bool = False
 
     def __post_init__(self):
         if not self.name:
@@ -53,7 +52,4 @@ class Product:
 
     def set_product_price(self, price: float, currency: str):
         self.price = Price(price, currency)
-
-    def archive_product(self):
-        self.is_archived = True
 

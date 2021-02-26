@@ -42,7 +42,7 @@ class ProductApiView(MethodView):
 
         products = self.repository.find_all()
 
-        return jsonify([self.convert_product_to_response(product) for product in products])
+        return jsonify([self.response_converter.convert_product_to_response(product) for product in products])
 
     def post(self):
         product_dto = self.request_converter.convert_create_request_to_dto(request.data)
@@ -57,16 +57,12 @@ class ProductApiView(MethodView):
         return jsonify(self.response_converter.convert_product_to_response(product))
 
     def delete(self, product_id):
-        try:
-            self.service.archive_product(product_id)
-        except InvalidProductException as e:
-            response, code = self.response_converter.convert_exception_to_response(e)
-            return jsonify(response), code
+        self.repository.delete_by(_id=product_id)
 
-        return None, 204
+        return jsonify(None), 204
 
 
 product_view = ProductApiView.as_view("product_api")
 product_blueprint.add_url_rule("/products/", defaults={"product_id": None}, view_func=product_view, methods=["GET"])
 product_blueprint.add_url_rule("/products/", view_func=product_view, methods=["POST"])
-product_blueprint.add_url_rule("/products/<int:product_id>", view_func=product_view, methods=["GET", "DELETE"])
+product_blueprint.add_url_rule("/products/<product_id>/", view_func=product_view, methods=["GET", "DELETE"])

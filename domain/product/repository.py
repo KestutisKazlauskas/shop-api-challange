@@ -26,7 +26,6 @@ class ProductRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def update_from(self, product: Product) -> None:
-        # TODO replace with delete only
+    def delete_by(self, product_id: str) -> None:
         raise NotImplementedError
 

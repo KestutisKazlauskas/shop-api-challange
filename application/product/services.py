@@ -47,12 +47,3 @@ class ProductService:
         self.repository.create_from(product)
 
         return product
-
-    def archive_product(self, product_id: str):
-        product = self.repository.find_by(_id=product_id)
-        # TODO maybe do not do this action and only delete from  repository???
-        product.archive_product()
-        self.repository.update_from(product)
-
-
-
