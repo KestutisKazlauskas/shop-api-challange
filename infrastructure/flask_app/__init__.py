@@ -19,6 +19,10 @@ def create_app(config_name):
     from infrastructure import models
 
     from application.product import product_blueprint
+    from application.cart import cart_blueprint
+    from application.order import order_blueprint
     app.register_blueprint(product_blueprint)
+    app.register_blueprint(cart_blueprint)
+    app.register_blueprint(order_blueprint)
 
     return app

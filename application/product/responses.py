@@ -1,8 +1,9 @@
+from application.common.responses import ResponseConverter
 from application.product.dtos import ProductDTO
 from domain.product.entities import Product
-from domain.product.exceptions import InvalidProductException
 
-class ProductResponseConverter:
+
+class ProductResponseConverter(ResponseConverter):
 
     @staticmethod
     def convert_product_to_response(product: Product) -> dict:
@@ -21,7 +22,3 @@ class ProductResponseConverter:
         )
 
         return product_dto.to_dict()
-
-    @staticmethod
-    def convert_exception_to_response(exception: InvalidProductException) -> (dict, int):
-        return {"message": exception.message}, 400

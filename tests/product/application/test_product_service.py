@@ -1,39 +1,12 @@
-import datetime
-from typing import List
-
 import pytest
 
 from application.product.dtos import ProductDTO
 from application.product.services import ProductService
-from domain.product.entities import Product, ProductType
-from domain.product.repository import ProductRepository
+from tests.common.mock_repositories import ProductMockRepository
 
 
 def image_validator(url: str):
     return True
-
-
-class Repository(ProductRepository):
-    def generate_id(self) -> str:
-        return str(datetime.datetime.now())
-
-    def find_all(self) -> List[Product]:
-        raise []
-
-    def find_by(self, _id: int) -> Product:
-        raise NotImplementedError
-
-    def find_product_type_by(self, _id: str) -> ProductType:
-        return ProductType(id=_id, name="Tests")
-
-    def create_product_type(self, product_type: ProductType) -> None:
-        raise NotImplementedError
-
-    def create_from(self, product: Product) -> None:
-        pass
-
-    def update_from(self, product: Product) -> None:
-        pass
 
 
 @pytest.fixture
@@ -43,7 +16,7 @@ def validator():
 
 @pytest.fixture
 def repository():
-    return Repository()
+    return ProductMockRepository()
 
 
 @pytest.fixture

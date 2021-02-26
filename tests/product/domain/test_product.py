@@ -1,6 +1,7 @@
 import pytest
+from domain.common.value_objects import Currency
+from domain.common.exceptions import InValidDomainException
 from domain.product.entities import Product, ProductType
-from domain.product.value_objects import Currency
 from domain.product.exceptions import InvalidProductException
 
 
@@ -57,14 +58,14 @@ def test_set_price(product):
 
 
 def test_invalid_product_price(product):
-    with pytest.raises(InvalidProductException, ) as error:
+    with pytest.raises(InValidDomainException, ) as error:
         product.set_product_price(12.90, "KKK")
 
     assert error.value.message == f"currency not matches {str(Currency.value_list())}"
 
 
 def test_invalid_product_price_value(product):
-    with pytest.raises(InvalidProductException, ) as error:
+    with pytest.raises(InValidDomainException, ) as error:
         product.set_product_price(-12.90, "USD")
 
     assert error.value.message == f"Price could not be negative."

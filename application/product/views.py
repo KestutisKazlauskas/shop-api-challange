@@ -15,7 +15,7 @@ class ProductApiView(MethodView):
     Request body example for POST api/products/:
         {
             "name": "Test product",
-            "product_type_id": "4585a664-9aef-44da-ba0c-9aa4ea787ce5",
+            "product_type_id": null,
             "product_type_name": "Not Sport",
             "quantity": 4,
             "price": 12.39,
@@ -50,11 +50,11 @@ class ProductApiView(MethodView):
             # Product application service will take care of the product presisting to db
             # Will return valid domain Product
             product = self.service.create_product(product_dto)
-        except InvalidProductException as e:
-            response, code = self.response_converter.convert_exception_to_response(e)
+        except InvalidProductException as error:
+            response, code = self.response_converter.convert_exception_to_response(error)
             return jsonify(response), code
 
-        return jsonify(self.response_converter.convert_product_to_response(product))
+        return jsonify(self.response_converter.convert_product_to_response(product)), 201
 
     def delete(self, product_id):
         self.repository.delete_by(_id=product_id)

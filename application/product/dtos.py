@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 from typing import List
 
+from application.common.dtos import BaseDTO
+
 
 @dataclass
-class ProductDTO:
+class ProductDTO(BaseDTO):
     id: str = None
     name: str = None
     quantity: int = None
@@ -14,7 +16,3 @@ class ProductDTO:
     product_type_id: str = None
     product_type_name: str = None
     images: List[dict] = None
-
-    def to_dict(self):
-        keys = self.__annotations__
-        return {key: getattr(self, key) for key in keys}

@@ -1,8 +1,7 @@
 import pytest
 from application.product.responses import ProductResponseConverter
 from domain.product.exceptions import InvalidProductException
-# TODO make product fixtures in separate
-from domain.product.entities import Product, ProductType, Image, Price
+from tests.common.mock_product import create_product
 
 from unittest import TestCase
 unittest_assertions = TestCase()
@@ -15,14 +14,7 @@ def response_converter():
 
 @pytest.fixture
 def product():
-    return Product(
-        id="Test",
-        name="Test",
-        quantity=12,
-        type=ProductType(id="test", name="Test"),
-        images=[Image(name="test", url="test_url")],
-        price=Price(12.34, "USD"),
-    )
+    return create_product()
 
 
 def test_convert_product_response(response_converter, product):
