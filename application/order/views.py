@@ -2,8 +2,8 @@ from flask import jsonify, request
 from flask.views import MethodView
 
 from domain.order.exceptions import InvalidOrderException
-from infrastructure.repositories.cart import Repository as CartRepository
-from infrastructure.repositories.order import Repository as OrderRepository
+from infrastructure.repositories.cart import CartRepository
+from infrastructure.repositories.order import OrderRepository
 from . import order_blueprint
 from .requests import OrderRequestConverter
 from .responses import OrderResponseConverter

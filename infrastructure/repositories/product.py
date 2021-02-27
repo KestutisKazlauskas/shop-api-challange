@@ -4,10 +4,14 @@ from domain.product.entities import Product, ProductType
 from domain.product.repository import ProductRepository as Repository
 from infrastructure.flask_app import db
 from infrastructure.models import Product as ProductModel, ProductType as ProductTypeModel
-from . import RepositoryIdGeneratorMixin
+from . import RepositoryIdGenerator
 
 
-class ProductRepository(Repository, RepositoryIdGeneratorMixin):
+class ProductRepository(Repository):
+
+    def __init__(self, uuid_generator=None):
+        self.uuid_generator = uuid_generator or RepositoryIdGenerator()
+
     @staticmethod
     def _convert_product_model_to_product(product_model: ProductModel) -> Product:
         _type = ProductType(
@@ -27,7 +31,7 @@ class ProductRepository(Repository, RepositoryIdGeneratorMixin):
         return product
 
     def generate_id(self) -> str:
-        return self.generate_id()
+        return self.uuid_generator.generate_id()
 
     def find_all(self) -> List[Product]:
         products = []

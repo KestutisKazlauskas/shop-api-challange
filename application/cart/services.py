@@ -1,8 +1,8 @@
 from domain.cart.entities import Cart, Item
 from domain.product.entities import Product
 from domain.cart.exceptions import InvalidCartException
-from infrastructure.repositories.cart import Repository as CartRepository
-from infrastructure.repositories.product import Repository as ProductRepository
+from domain.product.repository import ProductRepository
+from domain.cart.repository import CartRepository
 from .dtos import CartCreateDTO, ItemCreateDTO
 
 

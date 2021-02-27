@@ -2,8 +2,8 @@ from flask import jsonify, request
 from flask.views import MethodView
 
 from domain.cart.exceptions import InvalidCartException
-from infrastructure.repositories.cart import Repository as CartRepository
-from infrastructure.repositories.product import Repository as ProductRepository
+from infrastructure.repositories.cart import CartRepository
+from infrastructure.repositories.product import ProductRepository
 from . import cart_blueprint
 from .requests import CartRequestConverter
 from .responses import CartResponseConverter
