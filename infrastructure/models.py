@@ -43,6 +43,7 @@ class CartItem(db.Model):
 class Discount(db.Model):
     __tablename__ = 'cart_discount'
 
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
     cart_id = db.Column(UUID(as_uuid=True), db.ForeignKey('cart.id'), primary_key=True)
     name = db.Column(db.String(50))
     price = db.Column(db.Float)
@@ -63,7 +64,8 @@ class Cart(db.Model):
 class OrderItem(db.Model):
     __tablename__ = 'order_item'
 
-    order_id = db.Column(UUID(as_uuid=True), db.ForeignKey('order.id'), primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
+    order_id = db.Column(UUID(as_uuid=True), db.ForeignKey('order.id'))
     name = db.Column(db.String(50))
     quantity = db.Column(db.Integer)
     price = db.Column(db.Float)
@@ -71,6 +73,7 @@ class OrderItem(db.Model):
 
 class Order(db.Model):
     __tablename__ = 'order'
+
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
     cart_id = db.Column(UUID(as_uuid=True), db.ForeignKey('cart.id'), primary_key=True)
     items = db.relationship('OrderItem', backref='order_item', lazy="joined", join_depth=1)
@@ -80,4 +83,7 @@ class Order(db.Model):
     city = db.Column(db.String(255))
     country = db.Column(db.String(255))
     postal_code = db.Column(db.String(255))
+    total = db.Column(db.Float)
+    currency = db.Column(db.String(5))
+    status = db.Column(db.String(20))
 

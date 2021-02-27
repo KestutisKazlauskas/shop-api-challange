@@ -23,7 +23,7 @@ class OrderService:
             id=self.order_repository.generate_id(),
             cart_id=cart.id,
             items=[self.convert_cart_items_to_order(item) for item in cart.items],
-            discount=Price(sum([discount for discount in cart.discounts])),
+            discount=Price(sum([discount.value for discount in cart.discounts])),
             total=cart.total
         )
         if order_dto.name or order_dto.surname:

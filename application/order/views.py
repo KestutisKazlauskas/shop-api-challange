@@ -32,11 +32,11 @@ class OrderView(MethodView):
     def get(self, order_id):
         order = self.order_repository.find_by(order_id)
         if not order:
-            return jsonify({"message": "Cart not found"}), 404
+            return jsonify({"message": "Order not found"}), 404
 
         return jsonify(self.response_converter.convert_order_to_response(order))
 
 
 order_view = OrderView.as_view("order_api")
 order_blueprint.add_url_rule("/orders/", view_func=order_view, methods=["POST"])
-order_blueprint.add_url_rule("/orders/<order_id>", view_func=order_view, methods=["GET"])
+order_blueprint.add_url_rule("/orders/<order_id>/", view_func=order_view, methods=["GET"])
