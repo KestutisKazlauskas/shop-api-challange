@@ -28,12 +28,12 @@ class CartView(MethodView):
         return jsonify(self.response_converter.convert_cart_to_response(cart)), 200
 
     def post(self):
-        create_cart_dto = self.request_converter.convert_create_request_to_dto(request.data)
+        cart_create_dto = self.request_converter.convert_create_request_to_dto(request.data)
         try:
-            cart = self.service.create_cart(create_cart_dto)
+            cart = self.service.create_cart(cart_create_dto)
         except InvalidCartException as error:
             response, code = self.response_converter.convert_exception_to_response(error)
-            return response, code
+            return jsonify(response), code
 
         return jsonify(self.response_converter.convert_cart_to_response(cart)), 201
 
@@ -57,12 +57,12 @@ class CartItemView(MethodView):
         if not cart:
             return jsonify({"message": "Cart not found"}), 404
 
-        create_item_dto = self.request_converter.convert_create_item_request_to_dto(request.data)
+        item_create_dto = self.request_converter.convert_create_item_request_to_dto(request.data)
         try:
-            _, item = self.service.add_to_cart(cart, create_item_dto)
+            _, item = self.service.add_to_cart(cart, item_create_dto)
         except InvalidCartException as error:
             response, code = self.response_converter.convert_exception_to_response(error)
-            return response, code
+            return jsonify(response), code
 
         # TODO maybe here could return whole cart response because cart state has been changed
         return jsonify(self.response_converter.convert_cart_item_to_response(item)), 201
@@ -77,7 +77,7 @@ class CartItemView(MethodView):
             self.cart_repository.update_from(cart)
         except InvalidCartException as error:
             response, code = self.response_converter.convert_exception_to_response(error)
-            return response, code
+            return jsonify(response), code
 
         # TODO maybe here could return whole cart response because cart state has been changed
         return jsonify(None), 204

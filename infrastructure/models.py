@@ -57,12 +57,27 @@ class Cart(db.Model):
     currency = db.Column(db.String(5))
     items = db.relationship('CartItem', backref='cart_item', lazy="joined", join_depth=1)
     discounts = db.relationship('Discount', backref='cart_discount', lazy="joined", join_depth=1)
+    is_deleted = db.Column(db.Boolean, default=False, nullable=False)
 
 
-# class OrderItem(db.Model):
-#     __tablename__ = 'order_item'
-#
-#
-# class Order(db.Model):
-#     __tablename__ = 'order'
+class OrderItem(db.Model):
+    __tablename__ = 'order_item'
+
+    order_id = db.Column(UUID(as_uuid=True), db.ForeignKey('order.id'), primary_key=True)
+    name = db.Column(db.String(50))
+    quantity = db.Column(db.Integer)
+    price = db.Column(db.Float)
+
+
+class Order(db.Model):
+    __tablename__ = 'order'
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
+    cart_id = db.Column(UUID(as_uuid=True), db.ForeignKey('cart.id'), primary_key=True)
+    items = db.relationship('OrderItem', backref='order_item', lazy="joined", join_depth=1)
+    customer_name = db.Column(db.String(255))
+    customer_surname = db.Column(db.String(255))
+    street = db.Column(db.String(255))
+    city = db.Column(db.String(255))
+    country = db.Column(db.String(255))
+    postal_code = db.Column(db.String(255))
 
