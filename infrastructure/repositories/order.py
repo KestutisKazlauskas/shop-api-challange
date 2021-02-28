@@ -29,6 +29,7 @@ class OrderRepository(Repository):
             id=order.id,
             cart_id=order.cart_id,
             total=order.total.value,
+            discount=order.discount.value,
             currency=order.total.currency,
             status=order.status.value,
             customer_name=order.customer.name if order.customer else None,
@@ -66,6 +67,7 @@ class OrderRepository(Repository):
                 customer=customer,
                 shipping_address=address,
                 total=Price(order_model.total, order_model.currency),
+                discount=Price(order_model.discount, order_model.currency),
                 status=Status(order_model.status)
             )
 

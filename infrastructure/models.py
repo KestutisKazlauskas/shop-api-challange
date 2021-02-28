@@ -84,6 +84,7 @@ class Order(db.Model):
     country = db.Column(db.String(255))
     postal_code = db.Column(db.String(255))
     total = db.Column(db.Float)
+    discount = db.Column(db.Float)
     currency = db.Column(db.String(5))
     status = db.Column(db.String(20))
 
