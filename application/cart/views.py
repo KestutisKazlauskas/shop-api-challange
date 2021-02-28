@@ -64,7 +64,6 @@ class CartItemView(MethodView):
             response, code = self.response_converter.convert_exception_to_response(error)
             return jsonify(response), code
 
-        # TODO maybe here could return whole cart response because cart state has been changed
         return jsonify(self.response_converter.convert_cart_item_to_response(item)), 201
 
     def delete(self, cart_id, item_id):
@@ -79,7 +78,6 @@ class CartItemView(MethodView):
             response, code = self.response_converter.convert_exception_to_response(error)
             return jsonify(response), code
 
-        # TODO maybe here could return whole cart response because cart state has been changed
         return jsonify(None), 204
 
 
